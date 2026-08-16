@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FBF5EA">
+<meta name="description" content="Un viaje preparado exclusivamente para Doña Esperancita, con amor y verdad">
+<title>Para Doña Esperancita 💛</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%9B%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF5EA; --paper:#FFFDF8; --ink:#3A2F24; --ink-soft:#6E5D49;
+  --gold:#B4881F; --gold-2:#D9A93C; --gold-soft:#F3E3BC;
+  --teal-1:#123F3C; --teal-2:#1E6B5F;
+  --claim-bg:#F6EAD3; --claim-bd:#DCBE86;
+  --fact-bg:#EAF2E3; --fact-bd:#AFC9A0;
+  --heart-bg:#FBEDE3; --heart-bd:#E2B48F;
+  --scale:1;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:calc(20px * var(--scale));scroll-behavior:smooth}
+body{
+  font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--ink);
+  line-height:1.75;padding-top:4.3rem;min-height:100vh;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(60rem 30rem at 50% -10%,rgba(217,169,60,.14),transparent 60%);}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;line-height:1.25;color:var(--ink)}
+h1{font-size:2.2rem}h2{font-size:1.55rem;margin:.4rem 0 .9rem}
+h3{font-size:1.15rem}
+p{margin:.7rem 0}
+ol,ul{padding-left:1.2rem;margin:.6rem 0}
+li{margin:.35rem 0}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold-2);outline-offset:3px;border-radius:6px}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:.5rem;
+  padding:.55rem .8rem;background:rgba(255,253,248,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid #E8D9BC}
+.topbar .back{border:1px solid #D8C49A;background:var(--paper);border-radius:10px;
+  min-width:2.4rem;min-height:2.4rem;font-size:1.1rem;color:var(--ink)}
+.topbar .back:disabled{opacity:.35;cursor:default}
+.brand{font-family:'Playfair Display',serif;font-weight:700;font-size:.85rem;color:var(--gold);white-space:nowrap}
+.progress{flex:1;height:.55rem;background:#EFE3C8;border-radius:99px;overflow:hidden;min-width:2rem}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-2),var(--gold));
+  border-radius:99px;transition:width .5s ease}
+.tools{display:flex;gap:.3rem}
+.tools button{border:1px solid #D8C49A;background:var(--paper);border-radius:10px;
+  min-width:2.3rem;min-height:2.4rem;font-size:.9rem;color:var(--ink)}
+.tools button.active{background:var(--gold-soft);border-color:var(--gold)}
+.tools button.speaking{background:#E7F3EA;border-color:#7FAE8E}
+@media(max-width:420px){.brand{display:none}}
+
+.slide{display:none;position:relative;z-index:1;max-width:42rem;margin:0 auto;
+  padding:1.2rem 1.25rem 3.5rem;scroll-margin-top:4.5rem}
+.slide.active{display:block;animation:slideIn .55s ease both}
+@keyframes slideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.chip{display:inline-block;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;
+  background:var(--gold-soft);color:#7A5B12;border:1px solid #E0C580;border-radius:99px;
+  padding:.3rem .85rem;margin-bottom:.8rem;font-weight:600}
+.lead{font-size:1.05rem;color:var(--ink-soft)}
+.center{text-align:center}
+.divider{display:flex;align-items:center;gap:.8rem;margin:1.4rem 0;color:var(--gold)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,#D9B45C)}
+.divider::after{background:linear-gradient(90deg,#D9B45C,transparent)}
+
+.card{border-radius:16px;padding:1rem 1.15rem;margin:1rem 0;box-shadow:0 2px 10px rgba(90,70,30,.06)}
+.card .tag{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.92rem;margin-bottom:.4rem}
+.claim{background:var(--claim-bg);border:1px solid var(--claim-bd)}
+.claim .tag{color:#7A5B12}
+.fact{background:var(--fact-bg);border:1px solid var(--fact-bd)}
+.fact .tag{color:#3E6B34}
+.look{background:var(--paper);border:2px dashed #D9B45C}
+.look .tag{color:#8A6A1C}
+.bible{background:linear-gradient(140deg,var(--teal-1),var(--teal-2));color:#FDF8EC;
+  border:1px solid rgba(217,169,60,.6)}
+.bible .tag{color:#F1D48A}
+.bible .verse{font-size:1.12rem;font-style:italic;line-height:1.7;margin:.6rem 0;
+  border-left:3px solid var(--gold-2);padding-left:.9rem}
+.bible .ref{color:#F1D48A;font-weight:600;font-style:normal}
+.bible p{color:#EAF2E4}
+.heart{background:var(--heart-bg);border:1px solid var(--heart-bd)}
+.heart .tag{color:#9C5227}
+.note{font-size:.9rem;color:var(--ink-soft);font-style:italic}
+
+.rv{display:none;scroll-margin-top:4.6rem}
+.rv.on{display:block;animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.cta{display:block;width:100%;margin:1.6rem 0 .4rem;padding:1rem 1.4rem;border:none;border-radius:99px;
+  background:linear-gradient(135deg,#C79A2E,#A9791A);color:#fff;font-size:1.12rem;font-weight:600;
+  font-family:'Lora',serif;box-shadow:0 6px 18px rgba(169,121,26,.35);min-height:3.6rem}
+.cta:active{transform:scale(.985)}
+.cta.pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 6px 18px rgba(169,121,26,.35)}
+  50%{box-shadow:0 6px 26px rgba(217,169,60,.7)}}
+
+.cover{min-height:calc(100vh - 5rem);display:flex;flex-direction:column;justify-content:center;text-align:center}
+.cover .cross{font-size:2.6rem}
+.cover h1{font-size:2.5rem;margin:.6rem 0 .5rem}
+.cover .sub{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:1.05rem}
+.cover .promise{background:var(--paper);border:1px solid #E8D9BC;border-radius:16px;
+  padding:1rem 1.2rem;margin:1.4rem 0;font-size:.98rem;color:var(--ink-soft);text-align:left}
+.cover .meta{font-size:.85rem;color:var(--ink-soft);margin-bottom:.6rem}
+.float{position:absolute;font-size:1.3rem;opacity:.5;animation:floaty 7s ease-in-out infinite;pointer-events:none}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+.stones{list-style:none;display:grid;gap:.7rem;margin:1rem 0}
+.stone{display:flex;gap:.7rem;align-items:flex-start;text-align:left;width:100%;
+  background:var(--paper);border:1.5px solid #DCC9A0;border-radius:14px;padding:.9rem 1rem;
+  font-size:.96rem;line-height:1.6;color:var(--ink);transition:all .3s ease}
+.stone .tick{font-size:1.2rem;filter:grayscale(1);opacity:.35;transition:all .3s ease}
+.stone.done{background:var(--fact-bg);border-color:var(--fact-bd)}
+.stone.done .tick{filter:none;opacity:1;transform:scale(1.15)}
+
+.map{display:grid;gap:.55rem;margin:1rem 0}
+.map li{display:flex;align-items:center;gap:.7rem;background:var(--paper);
+  border:1px solid #E4D3AE;border-radius:12px;padding:.65rem .9rem;font-size:.95rem;list-style:none}
+.map .dot{min-width:2rem;height:2rem;border-radius:50%;display:grid;place-items:center;
+  background:var(--gold-soft);font-size:1rem}
+
+.flips{display:grid;gap:1rem;margin:1.1rem 0}
+.flip{perspective:1000px;min-height:15.5rem}
+.flip-inner{position:relative;width:100%;height:100%;min-height:15.5rem;transition:transform .6s ease;
+  transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:16px;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.face.front{background:var(--paper);border:1.5px solid #D9B45C}
+.face.back{background:linear-gradient(150deg,#4A3A28,#6B5236);color:#F5E9D2;transform:rotateY(180deg)}
+.face .word{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
+.face .greek{font-style:italic;color:var(--gold);font-size:.95rem}
+.face .lbl{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;opacity:.85}
+.face p{font-size:.93rem;line-height:1.6}
+.flip-hint{text-align:center;font-size:.85rem;color:var(--ink-soft);font-style:italic}
+
+.step-num{width:3.4rem;height:3.4rem;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#fff;
+  font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;margin-bottom:.7rem;
+  box-shadow:0 5px 14px rgba(169,121,26,.4)}
+.path-preview{display:flex;justify-content:center;gap:.55rem;flex-wrap:wrap;margin:1.2rem 0}
+.path-preview span{width:2.6rem;height:2.6rem;border-radius:50%;display:grid;place-items:center;
+  background:var(--gold-soft);border:1.5px solid var(--gold);font-weight:700;color:#7A5B12}
+
+.climax{text-align:center;padding:2rem 0;position:relative;overflow:hidden;border-radius:20px}
+.rays{position:absolute;inset:-40%;background:repeating-conic-gradient(rgba(217,169,60,.16) 0 6deg,transparent 6deg 15deg);
+  border-radius:50%;animation:spin 70s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.climax h2{position:relative;font-size:2.4rem;color:#7A5B12;margin:.6rem 0}
+.climax p{position:relative;max-width:30rem;margin-left:auto;margin-right:auto}
+
+.prayer{background:linear-gradient(150deg,var(--teal-1),var(--teal-2));color:#FDF8EC;
+  border-radius:16px;padding:1.2rem 1.3rem;font-style:italic;line-height:1.85;
+  border:1px solid rgba(217,169,60,.6)}
+.final-verse{font-family:'Playfair Display',serif;font-size:1.35rem;font-style:italic;
+  color:#7A5B12;text-align:center;line-height:1.7;margin:1.2rem 0}
+.sig{text-align:center;color:var(--ink-soft);font-size:.92rem;margin-top:1.4rem}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <button class="back" id="backBtn" aria-label="Volver">←</button>
+  <span class="brand">💛 Doña Esperancita</span>
+  <div class="progress"><i id="progressBar"></i></div>
+  <div class="tools">
+    <button id="fontMinus" aria-label="Letra más pequeña">A−</button>
+    <button id="fontPlus" aria-label="Letra más grande">A+</button>
+    <button id="audioBtn" aria-label="Escuchar">🔊</button>
+    <button id="restartBtn" aria-label="Empezar de nuevo">↺</button>
+  </div>
+</nav>
+
+<!-- ============ PORTADA ============ -->
+<section class="slide cover active">
+  <span class="float" style="top:12%;left:8%">✝️</span>
+  <span class="float" style="top:20%;right:10%;animation-delay:1.5s">🕊️</span>
+  <span class="float" style="bottom:18%;left:12%;animation-delay:3s">💛</span>
+  <div class="cross">✝️</div>
+  <h1>Para Mamá Esperancita</h1>
+  <p class="sub">Con todo mi cariño, con humildad aprendida de Cristo,<br>y con la verdad de la Biblia abierta entre los dos<br>le comparto esto.</p>
+  <div class="promise">
+    «Doña Esperancita, este viaje lo preparé <strong>solo para usted</strong>. Vi su video completo y leí con cuidado
+    todo lo que me compartió. Recórralo a su propio ritmo: sin prisa, sin presión, tocando cada puerta cuando usted quiera.»
+  </div>
+  <p class="meta">Un viaje con estaciones · Preparado exclusivamente para usted · Su avance se guarda solo</p>
+  <button class="cta" type="button">💛 Comenzar el viaje</button>
+</section>
+
+<!-- ============ CARTA ============ -->
+<section class="slide" data-cta="Seguir leyendo 💛">
+  <span class="chip">Doña Esperancita · 💌 La carta que abre el camino</span>
+  <h2>Doña Esperancita:</h2>
+  <p>Antes que nada, <strong>gracias</strong>. Gracias por pensar en mí, por enviarme ese video con tanto cariño, y por desear lo mejor para mi alma. Eso dice mucho de su corazón, y lo recibo con el mismo amor con que usted me lo mandó.</p>
+  <p>Usted es la mamá de mis mejores amigos — y para mí, mucho más que eso. <strong>Usted me mostró amor antes de que yo conociera a Cristo</strong>, cuando yo no tenía nada. Ese cariño me marcó para siempre, y hoy se lo devuelvo multiplicado.</p>
+  <p>Vi el video completo, dato por dato. Y también revisé con el mismo cuidado, verso por verso, el material que me compartió después.</p>
+  <p>Lo que sigue <strong>no es una respuesta para ganarle una discusión</strong>. Es mi manera de honrarla: tomándome en serio lo que usted me envió, y compartiéndole con la misma seriedad lo que yo he encontrado al abrir la Biblia junto a esos mismos datos.</p>
+  <p>A veces, con cariño, le voy a decir <em>«Mamá Esperancita»</em> — porque eso ha sido usted para mí. Pero lea todo esto con calma. Puede cerrar y volver después. <strong>Aquí no hay ninguna prisa.</strong></p>
+  <p class="note">Su amigo, que la quiere como a una segunda mamá 💛</p>
+</section>
+
+<!-- ============ PROMESA ============ -->
+<section class="slide" data-cta="Vamos juntos, Doña Esperancita 🤝">
+  <span class="chip">Doña Esperancita · 💛 Una promesa antes de caminar</span>
+  <h2>La elogio a usted — nunca a su religión</h2>
+  <p>Doña Esperancita, usted es tierna, amorosa y noble. Lo es de verdad. Pero quiero ser muy claro con usted:</p>
+  <p>Cuando la elogio, <strong>estoy hablando de su corazón, no de su religión</strong>. Su bondad no prueba ninguna doctrina — así como mi bondad no prueba la mía. Una persona maravillosa puede estar equivocada en una idea, y una doctrina no se vuelve verdadera porque quien la practica sea buena persona. Usted, como maestra que es, lo sabe mejor que nadie.</p>
+  <p>Y algo más importante todavía:</p>
+  <div class="rv look card look" data-btn="💛 Lea esto, por favor">
+    <div class="tag">💛 Mi promesa</div>
+    <p>Mi cariño y mi respeto por usted <strong>nunca han dependido de esto, ni van a depender jamás</strong>. No la quiero por pensar igual que yo, ni la querría menos si pensara distinto. La quiero porque es usted: Doña Esperancita, quien me dio amor cuando yo no tenía nada. Eso no se toca, pase lo que pase.</p>
+    <p>Lo que sigue no es una evaluación de usted. Es <strong>una conversación sobre ideas, entre dos personas que se quieren</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ LA MAESTRA ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · 🎓 La maestra</span>
+  <h2>Doña Esperancita, usted se jubiló siendo maestra. Perfecto.</h2>
+  <p>Toda su vida hizo usted lo mismo: <strong>examinar, preguntar, pedir evidencia</strong>. Hoy le propongo exactamente eso — pero con el tema más importante que existe.</p>
+  <p>El expositor del video repite una frase que me encanta: <strong>«dato mata relato»</strong>. ¿Sabe qué? Estoy de acuerdo. La hago mía: <strong>no me crea a mí, Doña Esperancita. Créale a los datos y a la Palabra de Dios.</strong> Yo mismo voy a aplicar esa regla a todo lo que él dice.</p>
+  <div class="rv fact card fact" data-btn="📋 Su rúbrica de maestra">
+    <div class="tag">📋 La rúbrica que usaremos juntos</div>
+    <p>En cada estación del video nos haremos <strong>tres preguntas de maestra</strong>:</p>
+    <ol>
+      <li>¿El dato histórico <strong>dice realmente</strong> lo que el video dice que dice?</li>
+      <li>¿La Biblia <strong>da ese salto</strong> — o el video lo da por su cuenta?</li>
+      <li>¿La palabra significa <strong>hoy</strong> lo mismo que significaba <strong>entonces</strong>?</li>
+    </ol>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Sobre su catequesis">
+    <div class="tag">💛 Sobre su catequesis</div>
+    <p>Sé que usted está en catequesis, aprendiendo. Muy bien: usted ya sabe lo que es estudiar una enseñanza con seriedad. Le propongo que <strong>estudiemos esta también juntos</strong>, Doña Esperancita, con la Biblia abierta — como usted les enseñaba a sus alumnos: mirando las fuentes.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ EL LENTE ============ -->
+<section class="slide" data-cta="Ya tengo el lente puesto. Sigamos →">
+  <span class="chip">Doña Esperancita · 🔤 El lente</span>
+  <h2>Antes de empezar: palabras que se quedaron… con significado nuevo</h2>
+  <p class="lead">Esta es la clave de todo el viaje, Doña Esperancita. Muchas veces el video usa <strong>la misma palabra que aparece en la Biblia, pero con un significado que se agregó siglos después</strong>. El nombre se quedó igual. La cosa nombrada, no.</p>
+  <p class="flip-hint">👆 Toque cada tarjeta para voltearla</p>
+  <div class="flips">
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Iglesia">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Iglesia</span><span class="greek">ekklesía</span>
+          <p>El cuerpo de todos los que Cristo compró con su sangre, en cualquier lugar y época. (Efesios 5:25-27; Hechos 20:28)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Una institución con sede fija en Roma, gobernada por un jefe visible con autoridad sobre todas las demás.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Obispo">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Obispo</span><span class="greek">epískopos</span>
+          <p>La misma palabra que «anciano»: un pastor local, siempre en plural en cada congregación. (Hechos 20:17,28; Tito 1:5-7)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Un rango superior con autoridad territorial, que termina en un solo obispo con poder sobre todos los del mundo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Sacerdote">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Sacerdote</span><span class="greek">hiereús</span>
+          <p>El Nuevo Testamento reserva esta palabra solo para Cristo, y para todo el pueblo de Dios en conjunto. (Hebreos 7:23-27; 1 Pedro 2:9)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Una clase ministerial separada del resto de los creyentes, con poderes exclusivos que nadie más tiene.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Sacrificio">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Sacrificio</span>
+          <p>El de Cristo, ofrecido <strong>una sola vez, para siempre</strong>. (Hebreos 10:12,14)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Algo que se repite en cada misa.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Tradición">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Tradición</span><span class="greek">parádosis</span>
+          <p>La enseñanza de los propios apóstoles, cerrada al morir el último de ellos. (2 Tesalonicenses 2:15; Judas 1:3)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Un proceso que sigue abierto y produce dogmas nuevos incluso siglos después — como en 1854 y en 1950.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip" role="button" tabindex="0" aria-label="Voltear tarjeta: Confesión">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="lbl">📖 En la Biblia</span>
+          <span class="word">Confesión</span>
+          <p>A Dios directamente, y de manera mutua entre hermanos. (1 Juan 1:9; Santiago 5:16)</p>
+        </div>
+        <div class="face back">
+          <span class="lbl">🏛️ Lo que se le agregó después</span>
+          <p>Un sacramento obligatorio y privado, solo ante un sacerdote ordenado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Con este lente puesto, Doña Esperancita, ningún dato la va a confundir. Ahora sí: al video.</p>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section class="slide" data-cta="Dar el primer paso →">
+  <span class="chip">Doña Esperancita · 🗺️ El camino</span>
+  <h2>Este es nuestro recorrido, Doña Esperancita</h2>
+  <p class="lead">Pasos cortos, de uno en uno. Toque el botón grande para avanzar.</p>
+  <ul class="map">
+    <li><span class="dot">🤝</span> Estación 1 · Lo que reconozco con usted</li>
+    <li><span class="dot">🎬</span> Estaciones 2–10 · El video, punto por punto</li>
+    <li><span class="dot">📄</span> Estaciones 11–14 · El informe, con calma</li>
+    <li><span class="dot">📖</span> El destino · El Evangelio de Jesús</li>
+    <li><span class="dot">💛</span> El abrazo final · Una carta para usted</li>
+  </ul>
+</section>
+
+<!-- ============ ESTACIÓN 1: RECONOCER ============ -->
+<section class="slide" data-cta="Abramos juntos el video 🎬">
+  <span class="chip">Doña Esperancita · Estación 1 · 🤝 Reconocer</span>
+  <h2>Primero, lo que es verdad</h2>
+  <p class="lead">«Dato mata relato» — empecemos entonces por los datos que abrazo sin problema. <strong>Toque cada piedrita</strong> para marcarla:</p>
+  <ul class="stones">
+    <li><button class="stone" type="button"><span class="tick">✅</span><span>La iglesia primitiva <strong>existió de verdad</strong>, tuvo estructura, ancianos y obispos desde muy temprano. No fue Constantino quien la inventó en el año 312. Ese es un dato histórico, no una postura católica ni evangélica.</span></button></li>
+    <li><button class="stone" type="button"><span class="tick">✅</span><span>Los primeros cristianos hablaban de la Cena del Señor <strong>con mucha reverencia</strong>, no como un recuerdo vacío. Ese es el dato; más adelante veremos por qué eso no equivale a la transustanciación.</span></button></li>
+    <li><button class="stone" type="button"><span class="tick">✅</span><span>Existe evidencia real de <strong>piedad hacia María</strong> desde tiempos tempranos. Y yo también la honro como la madre escogida por Dios — eso me lo enseña la Biblia misma.</span></button></li>
+    <li><button class="stone" type="button"><span class="tick">✅</span><span>La disciplina en la iglesia y la <strong>confesión de pecados entre hermanos</strong> son bíblicas, y las practico en mi propia iglesia.</span></button></li>
+    <li><button class="stone" type="button"><span class="tick">✅</span><span>El <strong>bautismo de niños</strong> está documentado desde el siglo III. Ese es el dato; mi pregunta, más adelante, es otra: si el agua por sí sola puede salvar.</span></button></li>
+  </ul>
+  <p class="note">¿Ve, Doña Esperancita? Empezamos por lo que es cierto. Ahora sí, al video.</p>
+</section>
+
+<!-- ============ VIDEO 1: SUCESIÓN APOSTÓLICA ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 2 · 🎬 Sucesión apostólica</span>
+  <h2>Los obispos, los apóstoles y el Papa</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Clemente (año 80), Ignacio (110), Ireneo (180) y Cipriano (251) hablan de obispos que reciben autoridad de los apóstoles… y de ahí concluye que <strong>ya existía la autoridad del Papa sobre todos los cristianos</strong> desde fines del siglo I.</p>
+  </div>
+  <div class="rv fact card fact" data-btn="✅ Primero, reconozco el dato">
+    <div class="tag">✅ El dato histórico es real</div>
+    <p>Es verdad: hubo obispos ordenados desde tiempos apostólicos, y hay listas reales de sucesión. Ese dato lo abrazo sin problema.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Ahora, la pregunta de maestra">
+    <div class="tag">🔍 Pregunta de maestra</div>
+    <p>¿«Obispo» en estos textos significa <strong>un jefe universal sobre todas las iglesias del mundo</strong>? Y hay algo más, Doña Esperancita: <strong>el mismo video cita a Cipriano… y fue Cipriano quien se opuso al obispo de Roma</strong> cuando no estuvo de acuerdo con él. Si ya existía un papado con autoridad absoluta, ese desacuerdo no habría sido posible.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Y desde Mileto enviando a Éfeso, hizo llamar a los <strong>ancianos</strong> de la iglesia… mirad por vosotros, y por todo el rebaño en que el Espíritu Santo os ha puesto por <strong>obispos</strong>.»</p>
+    <p class="ref">— Hechos 20:17, 28</p>
+    <p>Pablo llama «ancianos» al mismo grupo que dos versículos después llama «obispos». <strong>La misma palabra, el mismo cargo local, siempre en plural</strong> — no un monarca sobre el mundo.</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>Ireneo hizo su lista de nombres para defender <strong>la enseñanza de los apóstoles</strong> contra herejías. Una sucesión de nombres no es automáticamente una sucesión de doctrina. La vara para medir sigue siendo una sola: <strong>la Escritura</strong>.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 2: TRANSUSTANCIACIÓN ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 3 · 🎬 La misa</span>
+  <h2>La Eucaristía y la «transustanciación»</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Ignacio y Justino hablan del pan y el vino con lenguaje muy real… y concluye que <strong>ya se creía en la transustanciación</strong>. Y añade: «si crees que es un símbolo, te alineas con los gnósticos».</p>
+  </div>
+  <div class="rv fact card fact" data-btn="✅ Primero, reconozco el dato">
+    <div class="tag">✅ El dato histórico es real</div>
+    <p>Los primeros cristianos reverenciaban la Cena del Señor. <strong>Yo tampoco creo que sea un símbolo vacío.</strong></p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Ahora, el contexto (como usted enseñaba)">
+    <div class="tag">🔍 El contexto, como usted enseñaba a sus alumnos</div>
+    <p>Ignacio escribía contra gnósticos <strong>que negaban que Cristo tuvo un cuerpo real</strong>. Su punto era la encarnación — no un mecanismo filosófico. «Transustanciación» (sustancia y accidentes, tomada de Aristóteles) se definió como doctrina <strong>recién en el año 1215</strong>: mil cien años después. Y no, Doña Esperancita: yo creo plenamente en la encarnación de Cristo; solo no agrego una filosofía que no está en la Biblia.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Haced esto <strong>en memoria de mí</strong>… las veces que comiereis este pan y bebiereis esta copa, <strong>la muerte del Señor anunciáis</strong> hasta que él venga.»</p>
+    <p class="ref">— 1 Corintios 11:24-26</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 3: PURGATORIO + DIFUNTOS ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 4 · 🎬 Purgatorio y difuntos</span>
+  <h2>El purgatorio y la oración por los muertos</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Cita a Justino, a Orígenes, a Cipriano y al diario de Perpetua (donde ella ve a su hermano sufriendo y ora por él)… y concluye que <strong>el purgatorio era aceptado por todos</strong> y que se oraba por los difuntos.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Tres detalles de maestra">
+    <div class="tag">🔍 Tres detalles de maestra</div>
+    <p><strong>1.</strong> Orígenes, el mismo autor que el video cita como autoridad, <strong>fue declarado hereje en el año 553</strong> por otras enseñanzas suyas. Usarlo para una cosa y descartarlo para otras no es justo.</p>
+    <p><strong>2.</strong> El diario de Perpetua es <strong>una visión personal</strong>. Usted sabe, Doña Esperancita, que el diario de una alumna no es un libro de texto. Una visión no establece doctrina.</p>
+    <p><strong>3.</strong> Cipriano cita 1 Corintios 3:15 — un texto que habla del <strong>juicio de las obras del creyente</strong>, no de un lugar donde se paga por los pecados.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Está establecido para los hombres que <strong>mueran una sola vez, y después de esto el juicio</strong>.»</p>
+    <p class="ref">— Hebreos 9:27</p>
+    <p class="verse">«Confiamos, digo, y quisiéramos más bien estar <strong>ausentes del cuerpo, y presentes al Señor</strong>.»</p>
+    <p class="ref">— 2 Corintios 5:8</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>Cristo mismo dijo en la cruz: <strong>«Consumado es»</strong>. Si algo faltara por purgar o pagar, esa palabra no sería verdad. Guarde esa frase, Doña Esperancita — volveremos a ella al final.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 4: CONFESIÓN ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 5 · 🎬 Confesión</span>
+  <h2>La confesión al sacerdote y la penitencia</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>La Didajé (año 70) dice «confiesa tus pecados en la iglesia»; Ignacio habla de penitencia ante el obispo; Cipriano habla de confesar a los sacerdotes de Dios… y concluye que <strong>ya existía la confesión sacramental obligatoria</strong>, con autoridad para perdonar pecados.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Miremos el contexto">
+    <div class="tag">🔍 El contexto</div>
+    <p>La Didajé manda confesar <strong>antes de partir el pan, para que el culto sea puro</strong> — eso es confesión pública dentro de la congregación, no la confesión privada y obligatoria al sacerdote, que se estableció como ley <strong>recién en el año 1215</strong>. Y la cita de Juan 20:23 («a quienes perdonéis los pecados…») es la misión de <strong>proclamar el evangelio</strong>, no un tribunal.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Si confesamos nuestros pecados, <strong>él es fiel y justo para perdonar</strong> nuestros pecados.»</p>
+    <p class="ref">— 1 Juan 1:9</p>
+    <p class="verse">«Confesaos vuestras ofensas <strong>unos a otros</strong>.»</p>
+    <p class="ref">— Santiago 5:16</p>
+    <p>En ambos casos el perdón viene <strong>de Dios directamente</strong>, y la confesión mutua es entre hermanos — no de penitente a sacerdote.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 5: COMUNIÓN DE LOS SANTOS ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 6 · 🎬 Los santos</span>
+  <h2>La comunión de los santos</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Clemente de Alejandría (año 208): el cristiano fiel «ora en la sociedad de los ángeles… y aunque reza solo, <strong>tiene el coro de los santos que están con él</strong>». Conclusión del video: los vivos y los difuntos interceden unos por otros, y se puede pedir a los santos.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Lea el texto otra vez, maestra">
+    <div class="tag">🔍 Lea el texto otra vez, como usted enseñaba</div>
+    <p>El texto dice que el creyente ora <strong>acompañado</strong> — eso es comunión, y es real y hermoso. Pero fíjese bien, Doña Esperancita: en ese texto <strong>nadie le ora a un santo ni le pide nada</strong>. De «orar con los santos» a «orarles a los santos» hay un salto que el texto no da.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Porque hay un solo Dios, y <strong>un solo mediador</strong> entre Dios y los hombres, <strong>Jesucristo hombre</strong>.»</p>
+    <p class="ref">— 1 Timoteo 2:5</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>La comunión de los santos es bíblica y yo la celebro: todos los creyentes somos un cuerpo. Lo que no es bíblico es <strong>pedirle a un difunto lo que solo Dios puede dar</strong>.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 6: VENERACIÓN A MARÍA ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 7 · 🎬 La Virgen María</span>
+  <h2>La veneración a la Virgen María</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>El <em>Sub tuum praesidium</em> (año 250) le dice a la Virgen: <strong>«líbranos de todos los peligros»</strong>. Metodio (305) le ora: «a ti vuelvo mi mirada». Y concluye: quien no la invoca es «como un huérfano que no conoció a su madre».</p>
+  </div>
+  <div class="rv fact card fact" data-btn="✅ Primero, reconozco el dato">
+    <div class="tag">✅ El dato histórico es real</div>
+    <p>Existe devoción temprana a María. Y yo también la honro: <strong>«desde ahora me dirán bienaventurada»</strong> (Lucas 1:48). Eso lo aprendo de la Biblia misma, no del video.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Pero hagamos la pregunta difícil">
+    <div class="tag">🔍 La pregunta difícil</div>
+    <p>«Líbranos de todos los peligros» — ¿a quién se le dice eso en la Biblia, Doña Esperancita? <strong>Solo a Dios.</strong> Ese lenguaje es de oración a Dios, no de honor a una criatura. Y llamar «huérfano» al que no invoca a María es <strong>emoción, no evidencia</strong>. Usted me enseñó con su vida a distinguir el cariño del argumento.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Porque hay un solo Dios, y <strong>un solo mediador</strong> entre Dios y los hombres, Jesucristo hombre.»</p>
+    <p class="ref">— 1 Timoteo 2:5</p>
+    <p class="verse">«Si alguno hubiere pecado, <strong>abogado tenemos para con el Padre, a Jesucristo el justo</strong>.»</p>
+    <p class="ref">— 1 Juan 2:1</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>Yo amo y honro a María de corazón. Pero honrarla es <strong>creer lo que la Escritura dice de ella: ni una palabra menos, ni una palabra más</strong>. Cristo ya es el puente, y está siempre disponible, sin necesitar otro intermediario.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 7: DOGMAS MARIANOS ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 8 · 🎬 Dogmas de María</span>
+  <h2>Inmaculada Concepción, virginidad perpetua y Asunción</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Hipólito y Orígenes llaman a María «inmaculada»; Orígenes defiende su virginidad perpetua; y un texto de <strong>«Pseudo-Modetus»</strong> pide que el cuerpo de la madre de Jesús sea resucitado y llevado al cielo.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Verificación de fuentes (esto le va a gustar)">
+    <div class="tag">🔍 Verificación de fuentes — esto le va a gustar, maestra</div>
+    <p><strong>1. Virginidad perpetua:</strong> el mismo Orígenes admite que se apoya en el <strong>evangelio de Santiago</strong> — un libro apócrifo que <strong>no está en la Biblia</strong>.</p>
+    <p><strong>2. La Asunción:</strong> el texto es de «Pseudo-Modetus» — un autor <strong>que ni sabemos quién fue</strong>. El mismo video lo reconoce.</p>
+    <p><strong>3. La Inmaculada Concepción:</strong> se declaró dogma <strong>recién en 1854</strong>.</p>
+    <p>¿Qué haría usted, Doña Esperancita, si un alumno le presentara una fuente apócrifa y un autor desconocido como evidencia?</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Entonces María dijo: Engrandece mi alma al Señor, y mi espíritu se regocija en <strong>Dios mi Salvador</strong>.»</p>
+    <p class="ref">— Lucas 1:46-47</p>
+    <p class="verse">«Por cuanto <strong>todos pecaron</strong>, y están destituidos de la gloria de Dios.»</p>
+    <p class="ref">— Romanos 3:23</p>
+    <p>La misma María llamó a Dios <strong>su Salvador</strong>. Un ser inmaculado no necesitaría salvador, Doña Esperancita.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 8: BAUTISMO REGENERATIVO ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 9 · 🎬 El bautismo</span>
+  <h2>El bautismo que «regenera y salva»</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>La epístola de Bernabé (año 70), Tertuliano (200) y Justino enseñan que el bautismo <strong>lava los pecados y nos hace nacer de nuevo</strong> — y concluye que el nuevo nacimiento siempre fue el bautismo, nunca la fe sola.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Verificación de fuentes otra vez">
+    <div class="tag">🔍 Verificación de fuentes otra vez</div>
+    <p>El video dice: «recuerde quién era Bernabé: el compañero de Pablo». Pero la llamada <strong>«epístola de Bernabé» casi con certeza no fue escrita por el Bernabé de la Biblia</strong> — los estudiosos no están de acuerdo con esa autoría. Y Tertuliano, el mismo que el video cita, <strong>terminó uniéndose a la secta de los montanistas</strong>. Citar testigos solo en lo que conviene no es historia completa, Doña Esperancita.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«<strong>Cree en el Señor Jesucristo, y serás salvo</strong>, tú y tu casa.»</p>
+    <p class="ref">— Hechos 16:31</p>
+    <p class="verse">«El bautismo que corresponde a esto ahora nos salva… <strong>no como remoción de inmundicia de la carne, sino como petición a Dios de una buena conciencia</strong>.»</p>
+    <p class="ref">— 1 Pedro 3:21</p>
+    <p>La salvación es de la fe; el bautismo es la respuesta de una conciencia ya tocada por Dios.</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>El agua sin fe es solo agua. El ladrón en la cruz <strong>creyó y fue al paraíso — sin agua</strong> (Lucas 23:43). La fe, Doña Esperancita. Siempre la fe.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ VIDEO 9: BAUTISMO DE NIÑOS ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 10 · 🎬 Bautismo de niños</span>
+  <h2>El bautismo de los niños</h2>
+  <div class="card claim">
+    <div class="tag">🎬 Lo que dice el video</div>
+    <p>Hipólito (215), Orígenes (244) y Cipriano (250) bautizaban bebés — y lo presenta como prueba de que <strong>el bautismo quita el pecado por sí mismo</strong>.</p>
+  </div>
+  <div class="rv fact card fact" data-btn="✅ Primero, reconozco el dato">
+    <div class="tag">✅ El dato histórico es real</div>
+    <p>Reconozco que esa práctica es muy antigua. No voy a negar ese dato.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Pero mire la razón que da el video">
+    <div class="tag">🔍 Mire la razón que da Orígenes</div>
+    <p>Orígenes dice que se bautiza a los niños para lavar <strong>«la mancha innata del pecado»</strong>. Pero eso, Doña Esperancita, es <strong>exactamente lo que estamos examinando</strong>: usar la conclusión como si fuera la prueba. Usted detectaba eso en sus alumnos — razonamiento circular.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«<strong>El que creyere</strong> y fuere bautizado, será salvo.»</p>
+    <p class="ref">— Marcos 16:16</p>
+    <p>Mire el orden que el mismo Señor puso: <strong>primero creer, después el bautismo</strong>. Un bebé no puede creer todavía — por eso la pregunta queda abierta: ¿puede el agua, sin fe, quitar el pecado?</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ INFORME 1: JAMNIA ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 11 · 📄 El Informe</span>
+  <h2>El «Concilio de Jamnia»</h2>
+  <p class="note">Ahora revisemos también el segundo documento que me compartió, con el mismo lema: dato mata relato.</p>
+  <div class="card claim">
+    <div class="tag">📄 Lo que dice el informe</div>
+    <p>Que en el año 90 hubo un concilio judío formal que <strong>alteró a propósito las Escrituras</strong> para borrar las pruebas sobre Jesús como Mesías.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Miremos los datos">
+    <div class="tag">🔍 Los datos</div>
+    <p>Hoy, hasta estudiosos católicos reconocen que ese «concilio» formal <strong>nunca existió</strong>. Es una idea inventada en el siglo diecinueve, que la investigación seria ya corrigió — incluso dentro de círculos católicos.</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>No necesito esa teoría para confiar en mi Biblia, Doña Esperancita. <strong>Confío en ella por quien es su Autor</strong>, no por una historia de conspiración que ni siquiera ocurrió como se cuenta.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ INFORME 2: SOLA ESCRITURA ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 12 · 📄 El Informe</span>
+  <h2>«Sola Escritura», explicada con calma</h2>
+  <div class="card claim">
+    <div class="tag">📄 Lo que dice el informe</div>
+    <p>Que «sola Escritura» es una idea imposible, inventada en el siglo dieciséis, que ignora que hubo iglesia antes de la Biblia completa.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Eso no es lo que yo creo">
+    <div class="tag">🔍 Eso describe otra idea, no la mía</div>
+    <p>Yo no digo que la tradición ni la iglesia no valgan nada. Digo que <strong>solo la Biblia es la autoridad que nunca se equivoca</strong>; todo lo demás — hasta los concilios — se puede revisar a su luz.</p>
+  </div>
+  <div class="rv bible card bible" data-btn="📖 Abramos la Biblia">
+    <div class="tag">📖 Lo que dice la Biblia</div>
+    <p class="verse">«Estos eran más nobles que los que estaban en Tesalónica, pues recibieron la palabra con toda solicitud, <strong>escudriñando cada día las Escrituras para ver si estas cosas eran así</strong>.»</p>
+    <p class="ref">— Hechos 17:11</p>
+    <p>Los de Berea examinaban <strong>incluso la predicación del apóstol Pablo</strong> con la Biblia abierta. Eso es exactamente lo que le propongo, Doña Esperancita: que examinemos todo juntos con la Escritura.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ INFORME 3: JERÓNIMO ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 13 · 📄 El Informe</span>
+  <h2>San Jerónimo y el canon de la Biblia</h2>
+  <div class="card claim">
+    <div class="tag">📄 Lo que dice el informe</div>
+    <p>Que Martín Lutero <strong>«mutiló» la Biblia</strong> al quitar libros que siempre habían estado ahí.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Miremos quién estuvo antes">
+    <div class="tag">🔍 Miremos quién estuvo antes</div>
+    <p>San Jerónimo, quien tradujo la Biblia oficial que la Iglesia Católica usó durante mil años, <strong>ya decía que esos mismos libros no pertenecían al mismo nivel</strong> que el resto de la Escritura. Eso fue <strong>mil años antes</strong> de que naciera Lutero.</p>
+  </div>
+  <div class="rv heart card heart" data-btn="💛 Una palabra del corazón">
+    <div class="tag">💛 Nota del corazón</div>
+    <p>No es que Lutero haya inventado algo nuevo, Doña Esperancita. En este punto, <strong>él estaba más cerca de San Jerónimo</strong> que de lo que se definió siglos después.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ INFORME 4: DENOMINACIONES ============ -->
+<section class="slide">
+  <span class="chip">Doña Esperancita · Estación 14 · 📄 El Informe</span>
+  <h2>Las «45,000 denominaciones»</h2>
+  <div class="card claim">
+    <div class="tag">📄 Lo que dice el informe</div>
+    <p>Que existen 45,000 denominaciones distintas, como prueba de que <strong>el protestantismo no puede tener razón</strong>.</p>
+  </div>
+  <div class="rv look card look" data-btn="🔍 Miremos cómo se cuenta">
+    <div class="tag">🔍 Miremos cómo se cuenta</div>
+    <p>Ese número se calcula contando <strong>la misma iglesia como denominación distinta en cada país</strong>. Con ese método, hasta la Iglesia Católica aparecería contada cientos de veces por separado. El número real de familias con doctrinas verdaderamente distintas <strong>es mucho más pequeño</strong>.</p>
+  </div>
+  <button class="cta" type="button"></button>
+</section>
+
+<!-- ============ EVANGELIO: INTRO ============ -->
+<section class="slide" data-cta="Recorrer el camino 📖">
+  <span class="chip">Doña Esperancita · 📖 El destino del viaje</span>
+  <h2>El Evangelio que transformó mi vida</h2>
+  <p>Doña Esperancita, llegamos a lo que de verdad importa. No quiero regalarle una denominación. No quiero quitarle la suya para ponerle otra.</p>
+  <p><strong>Quiero presentarle a una Persona: Jesús.</strong></p>
+  <p>Usted es tierna, amorosa y noble — y aun así, como yo, como todos, necesita <strong>gracia</strong>. Porque el evangelio no es para los buenos; es para los que saben que no pueden salvarse a sí mismos.</p>
+  <div class="path-preview">
+    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+  </div>
+  <p class="lead">Seis pasos cortos. Uno a la vez.</p>
+</section>
+
+<!-- ============ PASO 1 ============ -->
+<section class="slide" data-cta="Paso 2 →">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 1</span>
+  <div class="step-num">1</div>
+  <h2>Todos hemos pecado</h2>
+  <p>No hay distinción, Doña Esperancita. Usted, yo, cualquier persona en esta tierra. Ninguna bondad nuestra alcanza la medida de un Dios santo.</p>
+  <div class="card bible">
+    <p class="verse">«Por cuanto <strong>todos pecaron</strong>, y están destituidos de la gloria de Dios.»</p>
+    <p class="ref">— Romanos 3:23</p>
+  </div>
+</section>
+
+<!-- ============ PASO 2 ============ -->
+<section class="slide" data-cta="Paso 3 →">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 2</span>
+  <div class="step-num">2</div>
+  <h2>La paga del pecado es muerte</h2>
+  <p>No hay purgatorio que pague esa deuda. No hay misa ni penitencia que la pague. La Biblia dice que la paga es <strong>muerte eterna</strong>.</p>
+  <div class="card bible">
+    <p class="verse">«Porque la paga del pecado es muerte, mas <strong>la dádiva de Dios es vida eterna</strong> en Cristo Jesús Señor nuestro.»</p>
+    <p class="ref">— Romanos 6:23</p>
+  </div>
+</section>
+
+<!-- ============ PASO 3 ============ -->
+<section class="slide" data-cta="Paso 4 →">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 3</span>
+  <div class="step-num">3</div>
+  <h2>Pero Dios nos amó tanto…</h2>
+  <p>…que envió a su Hijo. Jesús vivió la vida perfecta que nosotros no pudimos vivir. Murió la muerte que nosotros merecíamos. Y resucitó al tercer día.</p>
+  <div class="card bible">
+    <p class="verse">«Mas Dios muestra su amor para con nosotros, en que <strong>siendo aún pecadores, Cristo murió por nosotros</strong>.»</p>
+    <p class="ref">— Romanos 5:8</p>
+    <p class="verse">«Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que <strong>todo aquel que en él cree, no se pierda, mas tenga vida eterna</strong>.»</p>
+    <p class="ref">— Juan 3:16</p>
+  </div>
+</section>
+
+<!-- ============ PASO 4 ============ -->
+<section class="slide" data-cta="Paso 5 →">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 4</span>
+  <div class="step-num">4</div>
+  <h2>Es por gracia — y hasta la fe es regalo</h2>
+  <p>No por misas. No por rosarios. No por peregrinaciones. No por penitencias. <strong>Solamente por fe en lo que Cristo ya hizo.</strong></p>
+  <p>Y escuche esto, Doña Esperancita: <strong>ni siquiera esa fe nace de nosotros</strong>. Es Dios quien abre los ojos y regala el arrepentimiento y la fe. Lo hizo con una mujer llamada Lidia — y mi oración es que lo haga con usted.</p>
+  <div class="card bible">
+    <p class="verse">«Porque <strong>por gracia sois salvos por medio de la fe</strong>; y esto no de vosotros, pues es <strong>don de Dios</strong>; no por obras, para que nadie se gloríe.»</p>
+    <p class="ref">— Efesios 2:8-9</p>
+    <p class="verse">«Entonces <strong>una mujer llamada Lidia</strong>… estaba oyendo; y <strong>el Señor abrió el corazón de ella</strong> para que estuviese atenta a lo que Pablo decía.»</p>
+    <p class="ref">— Hechos 16:14</p>
+  </div>
+</section>
+
+<!-- ============ PASO 5: CLÍMAX ============ -->
+<section class="slide" data-cta="Paso 6 →">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 5</span>
+  <div class="step-num">5</div>
+  <h2>La obra está terminada</h2>
+  <div class="climax card" style="background:var(--gold-soft);border:1.5px solid var(--gold)">
+    <div class="rays"></div>
+    <p style="position:relative">En la cruz, Jesús dijo:</p>
+    <h2>«Consumado es»</h2>
+    <p>En el idioma original, esa palabra significaba: <strong>«la deuda está completamente pagada»</strong>.<br>No queda nada pendiente, Doña Esperancita. No hay purgatorio. No hay misa que repita el sacrificio. <strong>Está hecho.</strong></p>
+  </div>
+  <div class="card bible">
+    <p class="verse">«Porque con <strong>una sola ofrenda</strong> hizo perfectos <strong>para siempre</strong> a los santificados.»</p>
+    <p class="ref">— Hebreos 10:14 &nbsp;·&nbsp; Juan 19:30</p>
+  </div>
+</section>
+
+<!-- ============ PASO 6 ============ -->
+<section class="slide" data-cta="Continuar 💛">
+  <span class="chip">Doña Esperancita · 📖 El Camino · Paso 6</span>
+  <div class="step-num">6</div>
+  <h2>Usted puede acercarse directamente a Dios</h2>
+  <p>Sin ningún mediador humano. Sin rituales de por medio. Usted, Doña Esperancita, con su Biblia abierta, hablando con su Padre celestial.</p>
+  <div class="card bible">
+    <p class="verse">«Acerquémonos, pues, <strong>confiadamente al trono de la gracia</strong>, para alcanzar misericordia y hallar gracia para el oportuno socorro.»</p>
+    <p class="ref">— Hebreos 4:16</p>
+  </div>
+</section>
+
+<!-- ============ CARTA FINAL ============ -->
+<section class="slide" data-cta="Ir al final del viaje 💛">
+  <span class="chip">Doña Esperancita · 💛 Para usted</span>
+  <h2>Esto no es una pelea.<br>Es un abrazo con verdad.</h2>
+  <p>Doña Esperancita: si llegó hasta aquí, gracias. Gracias por leer con paciencia, y por el amor con el que me envió todo esto. Solo le pido una cosa: <strong>que no me crea a mí. Créale a lo que está escrito en la Palabra de Dios.</strong></p>
+  <p>El expositor del video tiene razón en algo importante: la iglesia primitiva existió, tenía estructura, tenía doctrina, y Constantino no la inventó. En eso, estoy de acuerdo con él.</p>
+  <p>Pero comete un error muy humano: <strong>toma un dato histórico real y lo estira</strong> hasta convertirlo en una doctrina que la Biblia no enseña. Porque Clemente habla de obispos, dice que ya existía el Papa. Porque Ignacio describe reverencia, dice que ya existía la transustanciación. Porque Perpetua tuvo una visión, dice que ya existía el purgatorio. Y además usa palabras bíblicas <strong>con significados que se agregaron siglos después</strong> — el lente que nos pusimos al principio. Eso no es historia completa. Es un salto muy grande.</p>
+  <p>Y lo más importante: el evangelio no es un sistema de misas, confesiones, penitencias y purgatorio. <strong>El evangelio es una Persona. Jesucristo.</strong> Que murió por usted. Que resucitó por usted. Que le dice: <em>«Venga, hija mía, ya está terminado. Ya pagué. Descanse en mí.»</em></p>
+  <p>Usted necesita gracia, Doña Esperancita — igual que yo. Y mi oración es que <strong>Dios mismo abra sus ojos, como abrió el corazón de Lidia, y le regale arrepentimiento y fe en su Hijo</strong>. Eso no lo puede dar ningún sistema. Solo lo puede dar Él.</p>
+  <p>Cuando la elogio, elogio su corazón — nunca su religión. Su ternura y su nobleza son suyas; no prueban una doctrina, y no necesitan que una doctrina las pruebe. Todo lo que le escribí aquí es sobre ideas, <strong>nunca sobre usted</strong>. No la quiero menos por ser católica, ni la querría más si pensara igual que yo. La quiero porque es usted — Mamá Esperancita, la que me dio amor cuando yo no tenía nada.</p>
+  <p><strong>En Cristo, ya es suficiente. Consumado es.</strong></p>
+  <p>La quiero. La honro como la persona que es, no como representante de ningún sistema. Y oro por usted todos los días.</p>
+  <p class="note">Su amigo de siempre 💛</p>
+  <div class="rv prayer" data-btn="🙏 Si hoy quiere hablar con Dios, toque aquí">
+    <p>Si desea orar, puede decirle esto a Dios, en voz alta, con sus propias palabras:</p>
+    <p>«Señor Jesús, hoy vengo a ti con el corazón abierto. Reconozco que he pecado y que no puedo salvarme con mis propias obras, ni con misas, ni con penitencias. Gracias porque en la cruz dijiste <em>Consumado es</em>, y pagaste todo por mí. Te pido que abras mis ojos, como abriste el corazón de Lidia, y me regales arrepentimiento y fe. Hoy confío solo en ti: en tu sangre, en tu resurrección, en tu amor. Sé tú mi único mediador, mi único puente, mi única esperanza. Entra en mi vida y dame la paz que solo tú puedes dar. En tu nombre, Jesús. Amén.»</p>
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="slide" data-cta="↺ Volver a empezar">
+  <div class="center" style="padding-top:2rem">
+    <div style="font-size:2.4rem">🕊️</div>
+    <p class="final-verse">«Porque yo sé los planes que tengo para vosotros, dice el Señor, planes de paz y no de mal, para daros un futuro y una esperanza.»</p>
+    <p style="text-align:center;color:var(--gold);font-weight:600">— Jeremías 29:11</p>
+    <div class="divider">✝️</div>
+    <p class="sig">Hecho con ❤️ para Doña Esperancita<br><em>«Escudriñad las Escrituras… ellas son las que dan testimonio de mí.» — Juan 5:39</em></p>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var total=slides.length;
+  var bar=document.getElementById('progressBar');
+  var backBtn=document.getElementById('backBtn');
+  var audioBtn=document.getElementById('audioBtn');
+  var seen={};
+  try{ JSON.parse(localStorage.getItem('de_seen')||'[]').forEach(function(i){seen[i]=true;}); }catch(e){}
+  var cur=0;
+  try{ cur=Math.min(Math.max(parseInt(localStorage.getItem('de_cur')||'0',10)||0,0),total-1); }catch(e){}
+
+  function save(){
+    try{
+      localStorage.setItem('de_cur',String(cur));
+      localStorage.setItem('de_seen',JSON.stringify(Object.keys(seen).map(Number)));
+    }catch(e){}
+  }
+  function updateCTA(s){
+    var btn=s.querySelector('.cta'); if(!btn) return;
+    var next=s.querySelector('.rv:not(.on)');
+    if(next){ btn.textContent=next.getAttribute('data-btn')||'Continuar →'; btn.classList.remove('pulse'); }
+    else{ btn.textContent=s.getAttribute('data-cta')||'Continuar →'; btn.classList.add('pulse'); }
+  }
+  function show(i,instant){
+    stopAudio();
+    slides.forEach(function(s,idx){ s.classList.toggle('active',idx===i); });
+    cur=i; seen[i]=true; save();
+    var s=slides[i];
+    if(seen[i]){ s.querySelectorAll('.rv').forEach(function(r){r.classList.add('on');}); }
+    updateCTA(s);
+    window.scrollTo({top:0,behavior:instant?'auto':'smooth'});
+    bar.style.width=((i/(total-1))*100)+'%';
+    backBtn.disabled=(i===0);
+  }
+  slides.forEach(function(s){
+    var btn=s.querySelector('.cta');
+    if(btn){ btn.addEventListener('click',function(){
+      var next=s.querySelector('.rv:not(.on)');
+      if(next){
+        next.classList.add('on');
+        setTimeout(function(){ next.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+        updateCTA(s);
+      }else if(cur<total-1){ show(cur+1); }
+      else{ try{localStorage.removeItem('de_cur');localStorage.removeItem('de_seen');}catch(e){} location.reload(); }
+    });}
+  });
+  backBtn.addEventListener('click',function(){ if(cur>0) show(cur-1); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'&&cur<total-1) show(cur+1);
+    if(e.key==='ArrowLeft'&&cur>0) show(cur-1);
+  });
+
+  document.querySelectorAll('.stone').forEach(function(st){
+    st.addEventListener('click',function(){ st.classList.toggle('done',true); });
+  });
+  document.querySelectorAll('.flip').forEach(function(f){
+    function t(){ f.classList.toggle('flipped'); }
+    f.addEventListener('click',t);
+    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); t(); }});
+  });
+
+  var sizes=[1,1.12,1.26], si=1;
+  try{ si=Math.min(Math.max(parseInt(localStorage.getItem('de_scale')||'1',10),0),2); }catch(e){}
+  function applyScale(){
+    document.documentElement.style.setProperty('--scale',sizes[si]);
+    document.getElementById('fontMinus').classList.toggle('active',si===0);
+    document.getElementById('fontPlus').classList.toggle('active',si===2);
+    try{ localStorage.setItem('de_scale',String(si)); }catch(e){}
+  }
+  document.getElementById('fontMinus').addEventListener('click',function(){ if(si>0){si--;applyScale();} });
+  document.getElementById('fontPlus').addEventListener('click',function(){ if(si<2){si++;applyScale();} });
+  applyScale();
+
+  document.getElementById('restartBtn').addEventListener('click',function(){
+    if(confirm('¿Volver a empezar el viaje desde el principio?')){
+      try{localStorage.removeItem('de_cur');localStorage.removeItem('de_seen');}catch(e){}
+      location.reload();
+    }
+  });
+
+  var speaking=false;
+  if(!('speechSynthesis' in window)){ audioBtn.style.display='none'; }
+  function setSpeaking(b){ speaking=b; audioBtn.textContent=b?'⏹':'🔊'; audioBtn.classList.toggle('speaking',b); }
+  function stopAudio(){ if(speaking){ try{speechSynthesis.cancel();}catch(e){} } setSpeaking(false); }
+  audioBtn.addEventListener('click',function(){
+    if(speaking){ stopAudio(); return; }
+    var s=slides[cur], parts=[];
+    s.querySelectorAll('h1,h2,h3,p,li,blockquote').forEach(function(el){
+      if(el.offsetParent!==null) parts.push(el.innerText);
+    });
+    var text=parts.join('\n'); if(!text.trim()) return;
+    try{speechSynthesis.cancel();}catch(e){}
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='es-ES'; u.rate=0.95;
+    var v=speechSynthesis.getVoices().find(function(v){return v.lang&&v.lang.toLowerCase().indexOf('es')===0;});
+    if(v) u.voice=v;
+    u.onend=function(){ setSpeaking(false); };
+    u.onerror=function(){ setSpeaking(false); };
+    speechSynthesis.speak(u); setSpeaking(true);
+  });
+
+  show(cur,true);
+})();
+</script>
+</body>
+</html>
